@@ -1,73 +1,135 @@
-<!DOCTYPE html>
-<html lang="ar">
+<!DOCTYPE html><html lang="ar">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>طلب منتج عبر واتساب</title>
   <style>
-    * {box-sizing: border-box; direction: rtl; font-family: Tahoma, sans-serif;}
-    body {margin: 0; padding: 20px; background: #f4f4f4;}
-    .container {
-      max-width: 500px; margin: auto; background: #fff; padding: 20px;
-      border-radius: 15px; box-shadow: 0 0 15px rgba(0,0,0,0.1);
+    * { box-sizing: border-box; direction: rtl; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+    body {
+      margin: 0;
+      padding: 0;
+      background: linear-gradient(to bottom right, #f2f6f9, #dfe9f3);
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
-    h2 {text-align: center; color: #2c4f48;}
-    .product {background: #eefbee; padding: 10px; margin: 10px 0; border-radius: 10px; display: flex; align-items: center; cursor: pointer;}
-    .product img {width: 80px; height: 80px; border-radius: 10px; object-fit: cover; margin-left: 10px;}
-    .product label {font-weight: bold; display: block;}
-    input[type="radio"] {margin-left: 10px;}
+    .container {
+      background: #fff;
+      width: 95%;
+      max-width: 500px;
+      padding: 25px;
+      border-radius: 20px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+      margin: 20px;
+    }
+    h2 {
+      text-align: center;
+      color: #1e3a5f;
+      margin-bottom: 25px;
+    }
+    .product {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      background: #f9fbfd;
+      border: 2px solid transparent;
+      padding: 10px;
+      border-radius: 12px;
+      cursor: pointer;
+      margin-bottom: 12px;
+      transition: all 0.2s ease;
+    }
+    .product:hover {
+      border-color: #a7c4e0;
+      background: #eef4fa;
+    }
+    .product img {
+      width: 70px;
+      height: 70px;
+      border-radius: 10px;
+      object-fit: cover;
+    }
+    .product label {
+      font-weight: bold;
+      font-size: 16px;
+      color: #2c3e50;
+    }
+    input[type="radio"] {
+      margin-left: 8px;
+    }
     input, textarea {
-      width: 100%; padding: 10px; margin-top: 10px;
-      border: 1px solid #ccc; border-radius: 8px; font-size: 15px;
+      width: 100%;
+      padding: 12px;
+      margin-top: 12px;
+      border: 1px solid #ccc;
+      border-radius: 10px;
+      font-size: 15px;
+      background: #f8f8f8;
     }
     button {
-      background: #2c4f48; color: #fff; border: none;
-      padding: 12px; width: 100%; border-radius: 10px;
-      margin-top: 15px; font-size: 16px; cursor: pointer;
+      background: #1e3a5f;
+      color: #fff;
+      border: none;
+      padding: 14px;
+      width: 100%;
+      border-radius: 10px;
+      margin-top: 20px;
+      font-size: 16px;
+      cursor: pointer;
+      transition: background 0.2s ease;
     }
-    button:hover {background: #1e3a34;}
-    #summary {display:none; background:#eefbee; padding:15px; margin-top:20px; border-radius:10px;}
-    #summary h3 {margin-top: 0; color: #1c3c36;}
+    button:hover {
+      background: #152b45;
+    }
+    #summary {
+      display: none;
+      background: #e6f2ff;
+      padding: 15px;
+      margin-top: 20px;
+      border-radius: 15px;
+    }
+    #summary h3 {
+      margin-top: 0;
+      color: #1e3a5f;
+    }
   </style>
 </head>
 <body>
   <div class="container">
-    <h2>📦 طلب منتج عبر واتساب</h2>
+    <h2>📦 طلب منتج عبر واتساب</h2><div class="product" onclick="selectProduct('قفطان فاخر', this)">
+  <input type="radio" name="product" value="قفطان فاخر" />
+  <img src="https://i.imgur.com/SK8YqlX.jpg" alt="قفطان" />
+  <label>قفطان فاخر</label>
+</div>
 
-    <div class="product" onclick="selectProduct('قفطان فاخر', this)">
-      <input type="radio" name="product" value="قفطان فاخر" />
-      <img src="https://i.imgur.com/SK8YqlX.jpg" alt="قفطان" />
-      <label>قفطان فاخر</label>
-    </div>
+<div class="product" onclick="selectProduct('زيت أركان طبيعي', this)">
+  <input type="radio" name="product" value="زيت أركان طبيعي" />
+  <img src="https://i.imgur.com/h2OEtdk.jpg" alt="زيت" />
+  <label>زيت أركان طبيعي</label>
+</div>
 
-    <div class="product" onclick="selectProduct('زيت أركان طبيعي', this)">
-      <input type="radio" name="product" value="زيت أركان طبيعي" />
-      <img src="https://i.imgur.com/h2OEtdk.jpg" alt="زيت" />
-      <label>زيت أركان طبيعي</label>
-    </div>
+<div class="product" onclick="selectProduct('بلغة رجالية تقليدية', this)">
+  <input type="radio" name="product" value="بلغة رجالية تقليدية" />
+  <img src="https://i.imgur.com/lrJBNWo.jpg" alt="بلغة" />
+  <label>بلغة رجالية تقليدية</label>
+</div>
 
-    <div class="product" onclick="selectProduct('بلغة رجالية تقليدية', this)">
-      <input type="radio" name="product" value="بلغة رجالية تقليدية" />
-      <img src="https://i.imgur.com/lrJBNWo.jpg" alt="بلغة" />
-      <label>بلغة رجالية تقليدية</label>
-    </div>
+<input type="text" id="name" placeholder="👤 اسمك الكامل" />
+<input type="text" id="phone" placeholder="📞 رقم الهاتف" />
+<input type="text" id="size" placeholder="📏 المقاس (مثلاً: M أو 38)" />
+<input type="text" id="city" placeholder="🏙️ المدينة" />
+<textarea id="notes" placeholder="📝 ملاحظات إضافية (اختياري)" rows="3"></textarea>
 
-    <input type="text" id="name" placeholder="👤 اسمك الكامل" />
-    <input type="text" id="phone" placeholder="📞 رقم الهاتف" />
-    <input type="text" id="size" placeholder="📏 المقاس (مثلاً: M أو 38)" />
-    <input type="text" id="city" placeholder="🏙️ المدينة" />
-    <textarea id="notes" placeholder="📝 ملاحظات إضافية (اختياري)" rows="3"></textarea>
+<button onclick="showSummary()">🔍 استعراض الطلب</button>
 
-    <button onclick="showSummary()">🔍 استعراض الطلب</button>
+<div id="summary">
+  <h3>ملخص الطلب:</h3>
+  <p id="summaryText"></p>
+  <button onclick="sendWhatsApp()">✅ إرسال عبر واتساب</button>
+</div>
 
-    <div id="summary">
-      <h3>ملخص الطلب:</h3>
-      <p id="summaryText"></p>
-      <button onclick="sendWhatsApp()">✅ إرسال عبر واتساب</button>
-    </div>
-  </div>
-
-  <script>
+  </div>  <script>
     function selectProduct(name, element) {
       const radios = document.querySelectorAll('input[name="product"]');
       radios.forEach(r => r.checked = false);
@@ -108,6 +170,5 @@
       const url = `https://wa.me/${seller}?text=${encodeURIComponent(msg)}`;
       window.open(url, "_blank");
     }
-  </script>
-</body>
+  </script></body>
 </html>
