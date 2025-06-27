@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>طلب المنتج عبر واتساب</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      direction: rtl;
+      font-family: 'Tahoma', sans-serif;
+    }
+    body {
+      margin: 0;
+      background-color: #f9f9f9;
+      padding: 20px;
+    }
+    .container {
+      max-width: 480px;
+      margin: auto;
+      background-color: #fff;
+      border-radius: 15px;
+      padding: 20px;
+      box-shadow: 0 0 20px rgba(0,0,0,0.1);
+    }
+    h2 {
+      text-align: center;
+      color: #2d5d4b;
+    }
+    .product {
+      border: 1px solid #ddd;
+      border-radius: 10px;
+      margin-bottom: 15px;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      background: #f6f6f6;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+    .product:hover {
+      background-color: #e3f0e7;
+    }
+    .product img {
+      width: 90px;
+      height: 90px;
+      object-fit: cover;
+      border-radius: 10px 0 0 10px;
+    }
+    .product-info {
+      flex: 1;
+      padding: 10px 15px;
+    }
+    .product-info label {
+      font-size: 16px;
+      font-weight: bold;
+      display: block;
+      margin-bottom: 5px;
+      cursor: pointer;
+    }
+    .product-info span {
+      color: #888;
+      font-size: 14px;
+    }
+    input[type="radio"] {
+      margin-left: 10px;
+      cursor: pointer;
+    }
+    input[type="text"] {
+      width: 100%;
+      padding: 12px;
+      margin: 12px 0;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+      font-size: 16px;
+    }
+    button {
+      background-color: #2d5d4b;
+      color: #fff;
+      padding: 14px;
+      border: none;
+      border-radius: 10px;
+      width: 100%;
+      font-size: 18px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+    button:hover {
+      background-color: #254d3e;
+    }
+    @media (max-width: 500px) {
+      .product {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+      .product img {
+        width: 100%;
+        height: auto;
+        border-radius: 10px 10px 0 0;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>طلب المنتج عبر واتساب</h2>
+
+    <div class="product" onclick="selectProduct('قفطان مغربي', this)">
+      <input type="radio" name="product" value="قفطان مغربي" id="p1" />
+      <img src="https://i.imgur.com/SK8YqlX.jpg" alt="قفطان مغربي" />
+      <div class="product-info">
+        <label for="p1">قفطان مغربي</label>
+        <span>السعر: 350 درهم</span>
+      </div>
+    </div>
+
+    <div class="product" onclick="selectProduct('زيت أركان طبيعي', this)">
+      <input type="radio" name="product" value="زيت أركان طبيعي" id="p2" />
+      <img src="https://i.imgur.com/h2OEtdk.jpg" alt="زيت أركان طبيعي" />
+      <div class="product-info">
+        <label for="p2">زيت أركان طبيعي</label>
+        <span>السعر: 80 درهم</span>
+      </div>
+    </div>
+
+    <div class="product" onclick="selectProduct('بلغة تقليدية رجالية', this)">
+      <input type="radio" name="product" value="بلغة تقليدية رجالية" id="p3" />
+      <img src="https://i.imgur.com/lrJBNWo.jpg" alt="بلغة تقليدية رجالية" />
+      <div class="product-info">
+        <label for="p3">بلغة تقليدية رجالية</label>
+        <span>السعر: 120 درهم</span>
+      </div>
+    </div>
+
+    <input type="text" id="name" placeholder="اسمك (اختياري)" />
+    <input type="text" id="phone" placeholder="رقمك (اختياري)" />
+    <button onclick="sendWhatsApp()">اطلب الآن عبر واتساب</button>
+  </div>
+
+  <script>
+    function selectProduct(productName, elem) {
+      const radios = document.getElementsByName('product');
+      for(let i=0; i<radios.length; i++) {
+        radios[i].checked = false;
+        radios[i].parentElement.style.backgroundColor = '#f6f6f6';
+      }
+      const input = elem.querySelector('input[type="radio"]');
+      input.checked = true;
+      elem.style.backgroundColor = '#e3f0e7';
+    }
+
+    function sendWhatsApp() {
+      const radios = document.getElementsByName('product');
+      let selected = '';
+      for(let i=0; i<radios.length; i++) {
+        if(radios[i].checked) {
+          selected = radios[i].value;
+          break;
+        }
+      }
+
+      if (!selected) {
+        alert('المرجو اختيار منتج');
+        return;
+      }
+
+      const name = encodeURIComponent(document.getElementById('name').value);
+      const phone = encodeURIComponent(document.getElementById('phone').value);
+
+      const message = `سلام، بغيت نطلب: ${encodeURIComponent(selected)}%0Aالاسم: ${name}%0Aالهاتف: ${phone}`;
+
+      const seller = '212611094923'; // ← عوض الرقم ديالك هنا بدون +
+
+      const url = `https://wa.me/${seller}?text=${message}`;
+
+      window.open(url, '_blank');
+    }
+  </script>
+</body>
+</html>
